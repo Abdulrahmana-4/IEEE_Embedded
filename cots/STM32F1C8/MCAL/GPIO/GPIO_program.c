@@ -75,6 +75,9 @@ STD_ReturnType Mcal_Gpio_SetPinMode(u8 Copy_Port_Id, u8 Copy_PinId, u8 Copy_PinM
             Local_FunctionStatus = E_NOT_OK;
         }
         break;
+    default:
+        Local_FunctionStatus = E_NOT_OK;
+        break;
     }
 
 

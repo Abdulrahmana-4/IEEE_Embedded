@@ -82,7 +82,7 @@ STD_ReturnType Mcal_Rcc_InitSysClock(void)
 
         /**< Select  ADC prescaler */
         RCC_CFGR &= ~((0b11) << (RCC_CFGR_ADCPRE));
-        RCC_CFGR |= ((RCC_ADCPRE_FACTOR) << (RCC_CFGR_ADCPRE));
+        RCC_CFGR |= ((RCC_ADCPRE_FACTOR) << (RCC_CFGR_ADCPRE));  /**< printf("")*/
 
         Local_FunctionStatus = E_OK;
 
@@ -126,7 +126,7 @@ STD_ReturnType Mcal_Rcc_InitSysClock(void)
 
         /**< Select  ADC prescaler */
         RCC_CFGR &= ~((0b11) << (RCC_CFGR_ADCPRE));
-        RCC_CFGR |= ((RCC_ADCPRE_FACTOR) << (RCC_CFGR_ADCPRE));
+        RCC_CFGR |= ((RCC_ADCPRE_FACTOR) << (RCC_CFGR_ADCPRE));_
 
         Local_FunctionStatus = E_OK;
 

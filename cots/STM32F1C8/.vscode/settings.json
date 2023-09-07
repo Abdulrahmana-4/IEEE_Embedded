@@ -1,6 +1,0 @@
-{
-    "C_Cpp.errorSquiggles": "disabled",
-    "files.associations": {
-        "rcc_interface.h": "c"
-    }
-}
