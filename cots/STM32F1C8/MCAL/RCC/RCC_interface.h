@@ -153,6 +153,18 @@ STD_ReturnType Mcal_Rcc_DisablePeripheral(u8 Copy_BusId, u8 Copy_PeripheralId);
 /**
  * @}
  */
+
+/**
+ * @brief Chek if the input frequency exceed 72 or not.
+ * 
+ * @param[in] Copy_RCC_CFGR_PLLSRC       The PLL clock source.
+ * @param[in] Copy_RCC_PLLMUL_FACTOR     The PLL multiplication factor.
+ * @param[in] Copy_RCC_HPRE_FACTOR       The AHB prescalerr.
+ * @return Std_ReturnType
+ * @retval E_OK                          The frquency is lower than 74.
+ * @retval E_NOT_OK                      The frquency is higher than 74.
+ */
+STD_ReturnType Mcal_Rcc_CheckPLLCLKFrequency(u8 Copy_RCC_CFGR_PLLSRC, u8 Copy_RCC_PLLMUL_FACTOR, u8 Copy_RCC_HPRE_FACTOR);
   
 
 /**

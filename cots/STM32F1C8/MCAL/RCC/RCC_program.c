@@ -107,6 +107,11 @@ STD_ReturnType Mcal_Rcc_InitSysClock(void)
         /**<Select PLL as a SYSCLK */ 
         RCC_CFGR &= ~((0b11) << (RCC_CFGR_SW));
         RCC_CFGR |= ((0b10) << (RCC_CFGR_SW));
+        
+        /**< Check PLL output frequency*/
+        #if Mcal_Rcc_CheckPLLCLKFrequency(RCC_CFGR_PLLSRC, RCC_PLLMUL_FACTOR, RCC_HPRE_FACTOR)!=E_OK
+            #error"wrong frequency!!"
+        #endif
 
         /**< Selcet PLL multiplication factor*/
         RCC_CFGR &= ~((0b1111) << (RCC_CFGR_PLLMUL));
@@ -190,6 +195,88 @@ STD_ReturnType Mcal_Rcc_DisablePeripheral(u8 Copy_BusId, u8 Copy_PeripheralId)
         break;
     }
 
+
+    return Local_FunctionStatus;
+}
+
+
+STD_ReturnType Mcal_Rcc_CheckPLLCLKFrequency(u8 Copy_RCC_CFGR_PLLSRC, u8 Copy_RCC_PLLMUL_FACTOR, u8 Copy_RCC_HPRE_FACTOR){
+    STD_ReturnType Local_FunctionStatus = E_NOT_OK;
+
+    u8 PLLSRC_FREQ;
+    #if Copy_RCC_CFGR_PLLSRC == RCC_CFGR_PLLSRC_HSE
+        PLLSRC_FREQ=25;
+    #elif Copy_RCC_CFGR_PLLSRC == RCC_CFGR_PLLSRC_HSI
+        PLLSRC_FREQ=8;
+    #endif
+
+
+    switch (Copy_RCC_HPRE_FACTOR)
+    {
+    case CFGR_HPRE_1:
+        #if (((Copy_RCC_PLLMUL_FACTOR+2)*PLLSRC_FREQ)/1)<72
+            Local_FunctionStatus = E_OK;
+        #else 
+            Local_FunctionStatus = E_NOT_OK;
+        #endif
+        break;
+    case CFGR_HPRE_2:
+        #if (((Copy_RCC_PLLMUL_FACTOR+2)*PLLSRC_FREQ)/2)<72
+            Local_FunctionStatus = E_OK;
+        #else 
+            Local_FunctionStatus = E_NOT_OK;
+        #endif
+        break;
+    case CFGR_HPRE_4:
+        #if (((Copy_RCC_PLLMUL_FACTOR+2)*PLLSRC_FREQ)/4)<72
+            Local_FunctionStatus = E_OK;
+        #else 
+            Local_FunctionStatus = E_NOT_OK;
+        #endif
+        break;
+    case CFGR_HPRE_8:
+        #if (((Copy_RCC_PLLMUL_FACTOR+2)*PLLSRC_FREQ)/8)<72
+            Local_FunctionStatus = E_OK;
+        #else 
+            Local_FunctionStatus = E_NOT_OK;
+        #endif
+        break;
+    case CFGR_HPRE_16:
+        #if (((Copy_RCC_PLLMUL_FACTOR+2)*PLLSRC_FREQ)/16)<72
+            Local_FunctionStatus = E_OK;
+        #else 
+            Local_FunctionStatus = E_NOT_OK;
+        #endif
+        break;
+    case CFGR_HPRE_64:
+        #if (((Copy_RCC_PLLMUL_FACTOR+2)*PLLSRC_FREQ)/64)<72
+            Local_FunctionStatus = E_OK;
+        #else 
+            Local_FunctionStatus = E_NOT_OK;
+        #endif
+        break;
+    case CFGR_HPRE_128:
+        #if (((Copy_RCC_PLLMUL_FACTOR+2)*PLLSRC_FREQ)/128)<72
+            Local_FunctionStatus = E_OK;
+        #else 
+            Local_FunctionStatus = E_NOT_OK;
+        #endif
+        break;
+    case CFGR_HPRE_256:
+        #if (((Copy_RCC_PLLMUL_FACTOR+2)*PLLSRC_FREQ)/256)<72
+            Local_FunctionStatus = E_OK;
+        #else 
+            Local_FunctionStatus = E_NOT_OK;
+        #endif
+        break;
+    case CFGR_HPRE_512:
+        #if (((Copy_RCC_PLLMUL_FACTOR+2)*PLLSRC_FREQ)/512)<72
+            Local_FunctionStatus = E_OK;
+        #else 
+            Local_FunctionStatus = E_NOT_OK;
+        #endif
+        break;
+    }
 
     return Local_FunctionStatus;
 }
