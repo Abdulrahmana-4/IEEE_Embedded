@@ -22,6 +22,8 @@ typedef double            f64;
 typedef long double       f96;
 
 typedef u8                STD_ReturnType;
+typedef s8                INVALID_VALUE;   /**< Marker for invalid or uninitialized data */
+
 #define E_OK              (STD_ReturnType)1
 #define E_NOT_OK          (STD_ReturnType)0
 

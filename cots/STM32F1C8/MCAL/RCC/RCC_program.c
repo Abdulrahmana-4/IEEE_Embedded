@@ -276,6 +276,9 @@ STD_ReturnType Mcal_Rcc_CheckPLLCLKFrequency(u8 Copy_RCC_CFGR_PLLSRC, u8 Copy_RC
             Local_FunctionStatus = E_NOT_OK;
         #endif
         break;
+    default:
+        Local_FunctionStatus = E_NOT_OK;
+        break;
     }
 
     return Local_FunctionStatus;

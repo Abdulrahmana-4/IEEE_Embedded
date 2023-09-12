@@ -59,11 +59,24 @@
 /** @} */
 
 /**
+ * @brief NVIC IPR Base Address
+ */                                                 
+#define NVIC_IPR_BASE_ADDRESS    (((volatile u8 *)0xE000E400)) /**< INTERRUPT PRIORITY REGISTERS BASE ADDRESS */
+
+/**
+ * @brief Priority Grouping Values
+ * @{
+ */
+#define NVIC_16GROUP_0SUB   0x05FA0300U /**< 16 Priority Levels, No Sub-priority */
+#define NVIC_8GROUP_2SUB    0x05FA0400U /**< 8 Priority Levels, 2 Sub-priority Levels */
+#define NVIC_4GROUP_4SUB    0x05FA0500U /**< 4 Priority Levels, 4 Sub-priority Levels */
+#define NVIC_2GROUP_8SUB    0x05FA0600U /**< 2 Priority Levels, 8 Sub-priority Levels */
+#define NVIC_0GROUP_16SUB   0x05FA0700U /**< No Grouping, 16 Sub-priority Levels */
+/** @} */
+
+
+/**
  * @} (end of group NVIC_Registers)
  */
-
-    
-
-
 
 #endif /**< NVIC_PRIVATE_H_ */

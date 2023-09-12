@@ -1,12 +1,11 @@
-/*********************************************************************************************/
-/******************************* Author    : Abdulrahman Ahmed *******************************/
-/******************************* Version   : 0.1               *******************************/
-/******************************* Module    : RCC_config.h      *******************************/
-/*********************************************************************************************/
-
+/****************************************************************/
+/******* Author    : Mahmoud Abdelraouf Mahmoud *****************/
+/******* Date      : 26 Aug 2023                *****************/
+/******* Version   : 0.1                        *****************/
+/******* File Name : RCC_config.h               *****************/
+/****************************************************************/
 #ifndef RCC_CONFIG_H_
 #define RCC_CONFIG_H_
-
 
 /**
  * @defgroup RCC_System_Clock_Config RCC System Clock Configuration Macros
@@ -30,17 +29,7 @@
  *                  a higher frequency output. PLL provides flexibility in tuning the clock frequency,
  *                  making it suitable for applications with specific performance requirements.
  */
-
-
-
-/**
- * @brief
- * your options : RCC_HSI
- *              : RCC_HSE
- *              : RCC_PLL
- */
-
-#define RCC_SYSCLK        RCC_HSE
+#define RCC_SYSCLK            RCC_HSE
 
 
 /**
@@ -49,12 +38,19 @@
  *       RCC_RC_CLK_       - RC oscillator will be the source of the clock system.
  *       RCC_CRYSTAL_CLK_  - Crystal oscillator will be the source of the clock system.
  */
-
 #if RCC_SYSCLK == RCC_HSE
-#define RCC_CLK_BYPASS        RCC_RC_CLK
 
-#endif
+#define RCC_CLK_BYPASS        RCC_CRYSTAL_CLK_
+                                
+#endif /**< RCC_SYSCLK */
+
+#if RCC_SYSCLK == RCC_PLL
 
 
+#endif /**< RCC_SYSCLK */
 
-#endif /*RCC_CONFIG_H_*/
+/** @} */ // end of RCC_System_Clock_Config
+
+
+                                
+#endif /**< RCC_CONFIG_H_ */

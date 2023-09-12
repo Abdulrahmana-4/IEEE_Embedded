@@ -3,7 +3,7 @@
  * Auto generated Run-Time-Environment Configuration File
  *      *** Do not modify ! ***
  *
- * Project: 'RCC_test' 
+ * Project: 'RCC_Test' 
  * Target:  'Target 1' 
  */
 

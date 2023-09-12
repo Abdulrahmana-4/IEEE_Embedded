@@ -1,9 +1,9 @@
-/*********************************************************************************************/
-/******************************* Author    : Abdulrahman Ahmed *******************************/
-/******************************* Version   : 0.1               *******************************/
-/******************************* Module    : RCC_interface.h   *******************************/
-/*********************************************************************************************/
-
+/****************************************************************/
+/******* Author    : Mahmoud Abdelraouf Mahmoud *****************/
+/******* Date      : 26 Aug 2023                *****************/
+/******* Version   : 0.1                        *****************/
+/******* File Name : RCC_interface.h            *****************/
+/****************************************************************/
 #ifndef RCC_INTERFACE_H_
 #define RCC_INTERFACE_H_
 
@@ -23,13 +23,11 @@
 /**
  * @brief Available clock domains for peripheral clock configuration.
  */
-
-#define RCC_AHB                 0  /**< Advanced High-performance Bus (AHB) domain. */
-#define RCC_APB1                1  /**< Advanced Peripheral Bus 1 (APB1) domain. */
-#define RCC_APB2                2  /**< Advanced Peripheral Bus 2 (APB2) domain. */
+#define RCC_AHB                 0 /**< Advanced High-performance Bus (AHB) domain. */
+#define RCC_APB1                1 /**< Advanced Peripheral Bus 1 (APB1) domain. */
+#define RCC_APB2                2 /**< Advanced Peripheral Bus 2 (APB2) domain. */
 
 /** @} */
-
 
 /**
  * @defgroup RCC_AHBENR_Bit_Def RCC_AHBENR Bit Definitions
@@ -50,7 +48,6 @@
 #define RCC_AHBENR_OTGHSEN      29 /**< USB OTG HS clock enable */
 
 /** @} */
-
 
 /**
  * @defgroup RCC_APB1ENR_Bit_Def RCC_APB1ENR Bit Definitions
@@ -130,7 +127,7 @@
  * @retval E_OK     Clock initialization successful.
  * @retval E_NOT_OK Clock initialization failed.
  */
-STD_ReturnType Mcal_Rcc_InitSysClock(void);
+Std_ReturnType MCAL_RCC_InitSysClock(void);
 
 /**
  * @brief Enable a specific peripheral on a specific bus.
@@ -143,7 +140,7 @@ STD_ReturnType Mcal_Rcc_InitSysClock(void);
  * @retval E_OK     Peripheral enabling successful.
  * @retval E_NOT_OK Peripheral enabling failed.
  */
-STD_ReturnType Mcal_Rcc_EnablePeripheral(u8 Copy_PeripheralId, u8 Copy_BusId);
+Std_ReturnType MCAL_RCC_EnablePeripheral(u8 Copy_BusId, u8 Copy_PeripheralId);
 
 /**
  * @brief Disable a specific peripheral.
@@ -156,7 +153,7 @@ STD_ReturnType Mcal_Rcc_EnablePeripheral(u8 Copy_PeripheralId, u8 Copy_BusId);
  * @retval E_OK     Peripheral disabling successful.
  * @retval E_NOT_OK Peripheral disabling failed.
  */
-STD_ReturnType Mcal_Rcc_DisablePeripheral(u8 Copy_PeripheralId, u8 Copy_BusId);
+Std_ReturnType MCAL_RCC_DisablePeripheral(u8 Copy_BusId, u8 Copy_PeripheralId);
 
 /**
  * @}
@@ -165,10 +162,4 @@ STD_ReturnType Mcal_Rcc_DisablePeripheral(u8 Copy_PeripheralId, u8 Copy_BusId);
 
 
 
-
-
-
-
-
-
-#endif /*RCC_INTERFACE_H_*/
+#endif /**< RCC_INTERFACE_H_ */
