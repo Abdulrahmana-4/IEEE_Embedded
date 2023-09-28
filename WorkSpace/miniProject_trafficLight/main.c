@@ -153,19 +153,6 @@ void EXTI0_IRQHandler(void){
 	
 else if(Pedestrain_Status){
 	
-	/*if(Pedestrain_Yellow_TrafficLight || Pedestrain_Red_TrafficLight){
-	
-		MCAL_GPIO_SetPinValue(GPIO_PORTA,GPIO_PIN3,GPIO_LOW);
-		MCAL_GPIO_SetPinValue(GPIO_PORTB,GPIO_PIN1,GPIO_LOW);
-
-			u32 i;
-			for (i=0; i<2000; i++){
-				MCAL_GPIO_TogglePin(GPIO_PORTA,GPIO_PIN2);
-				MCAL_GPIO_TogglePin(GPIO_PORTB,GPIO_PIN2);
-				
-			}
-			MCAL_GPIO_SetPinValue(GPIO_PORTA,GPIO_PIN1,GPIO_LOW);
-	}*/
 	EXTI_ClearPending(EXTI_LINE0);
 	MCAL_NVIC_ClearPendingIRQ(NVIC_EXTI0_IRQn);
 }
