@@ -1,0 +1,173 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: µVision V5.38.0.0
+Copyright (C) 2022 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: Abdulrahman Ahmed, Ain shams university, LIC=----
+ 
+Tool Versions:
+Toolchain:       MDK-Lite  Version: 5.38.0.0
+Toolchain Path:  C:\Keil_v5\ARM\ARMCLANG\Bin
+C Compiler:      ArmClang.exe V6.19
+Assembler:       Armasm.exe V6.19
+Linker/Locator:  ArmLink.exe V6.19
+Library Manager: ArmAr.exe V6.19
+Hex Converter:   FromElf.exe V6.19
+CPU DLL:         SARMCM3.DLL V5.38.0.0
+Dialog DLL:      DCM.DLL V1.17.5.0
+Target DLL:      UL2CM3.DLL V1.164.8.0
+Dialog DLL:      TCM.DLL V1.56.4.0
+ 
+<h2>Project:</h2>
+D:\courses\embedded IEEE\IEEE_Embedded\WorkSpace\miniProject_trafficLight\Traffic_light.uvprojx
+Project File Date:  09/27/2023
+
+<h2>Output:</h2>
+*** Using Compiler 'V6.19', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
+Build target 'Target 1'
+main.c(12): warning: In file included from...
+./RCC_interface.h(164): warning: no newline at end of file [-Wnewline-eof]
+#endif /**< RCC_INTERFACE_H_ */
+                               ^
+main.c(13): warning: In file included from...
+./GPIO_interface.h(32): warning: // comments are not allowed in this language [-Wcomment]
+/** @} */ // End of GPIO_Values group
+          ^
+./GPIO_interface.h(151): warning: no newline at end of file [-Wnewline-eof]
+#endif /**< GPIO_INTERFACE_H_ */
+                                ^
+main.c(15): warning: In file included from...
+./AFIO_interface.h(60): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
+    AFIO_REMAP_CUSTOM,   /**< Custom remap (user-defined) */ 
+                     ^~
+./AFIO_interface.h(63): warning: // comments are not allowed in this language [-Wcomment]
+/** @} */  // End of AFIO_Remap_Options group
+           ^
+main.c(16): warning: In file included from...
+./SCB_interface.h(111): warning: no newline at end of file [-Wnewline-eof]
+#endif /**< SCB_INTERFACE_H_ */
+                               ^
+main.c(17): warning: In file included from...
+./EXTI_interface.h(57): warning: // comments are not allowed in this language [-Wcomment]
+/** @} */  // EXTI_Configurations
+           ^
+./EXTI_interface.h(152): warning: no newline at end of file [-Wnewline-eof]
+#endif /**< EXTI_INTERFACE_H_ */
+                                ^
+main.c(18): warning: In file included from...
+./STK_interface.h(48): warning: '/*' within block comment [-Wcomment]
+/**
+^
+main.c(35): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+        MCAL_GPIO_SetPinMode(GPIO_PORTA, GPIO_PIN0, GPIO_INPUT_PULL_UP);
+                                                    ^
+./GPIO_interface.h(66): note: expanded from macro 'GPIO_INPUT_PULL_UP'
+#define GPIO_INPUT_PULL_UP                      0b1000 /**< GPIO Input Pull up Mode */
+                                                ^
+main.c(36): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+        MCAL_GPIO_SetPinMode(GPIO_PORTA, GPIO_PIN1, GPIO_OUTPUT_PUSH_PULL_2MHZ);
+                                                    ^
+./GPIO_interface.h(79): note: expanded from macro 'GPIO_OUTPUT_PUSH_PULL_2MHZ'
+#define GPIO_OUTPUT_PUSH_PULL_2MHZ               0b0010 /**< GPIO Output Push-Pull Mode, 2MHz */
+                                                 ^
+main.c(37): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+        MCAL_GPIO_SetPinMode(GPIO_PORTA, GPIO_PIN2, GPIO_OUTPUT_PUSH_PULL_2MHZ);
+                                                    ^
+./GPIO_interface.h(79): note: expanded from macro 'GPIO_OUTPUT_PUSH_PULL_2MHZ'
+#define GPIO_OUTPUT_PUSH_PULL_2MHZ               0b0010 /**< GPIO Output Push-Pull Mode, 2MHz */
+                                                 ^
+main.c(38): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+        MCAL_GPIO_SetPinMode(GPIO_PORTA, GPIO_PIN3, GPIO_OUTPUT_PUSH_PULL_2MHZ);
+                                                    ^
+./GPIO_interface.h(79): note: expanded from macro 'GPIO_OUTPUT_PUSH_PULL_2MHZ'
+#define GPIO_OUTPUT_PUSH_PULL_2MHZ               0b0010 /**< GPIO Output Push-Pull Mode, 2MHz */
+                                                 ^
+main.c(39): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+        MCAL_GPIO_SetPinMode(GPIO_PORTB, GPIO_PIN1, GPIO_OUTPUT_PUSH_PULL_2MHZ);
+                                                    ^
+./GPIO_interface.h(79): note: expanded from macro 'GPIO_OUTPUT_PUSH_PULL_2MHZ'
+#define GPIO_OUTPUT_PUSH_PULL_2MHZ               0b0010 /**< GPIO Output Push-Pull Mode, 2MHz */
+                                                 ^
+main.c(40): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+        MCAL_GPIO_SetPinMode(GPIO_PORTB, GPIO_PIN2, GPIO_OUTPUT_PUSH_PULL_2MHZ);
+                                                    ^
+./GPIO_interface.h(79): note: expanded from macro 'GPIO_OUTPUT_PUSH_PULL_2MHZ'
+#define GPIO_OUTPUT_PUSH_PULL_2MHZ               0b0010 /**< GPIO Output Push-Pull Mode, 2MHz */
+                                                 ^
+main.c(41): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+        MCAL_GPIO_SetPinMode(GPIO_PORTB, GPIO_PIN3, GPIO_OUTPUT_PUSH_PULL_2MHZ);
+                                                    ^
+./GPIO_interface.h(79): note: expanded from macro 'GPIO_OUTPUT_PUSH_PULL_2MHZ'
+#define GPIO_OUTPUT_PUSH_PULL_2MHZ               0b0010 /**< GPIO Output Push-Pull Mode, 2MHz */
+                                                 ^
+main.c(57): warning: implicit declaration of function '__enable_irq' [-Wimplicit-function-declaration]
+        __enable_irq();
+        ^
+main.c(115): warning: declaration shadows a local variable [-Wshadow]
+                        u32 i;
+                            ^
+main.c(97): note: previous declaration is here
+        u32 i;
+            ^
+main.c(115): warning: mixing declarations and code is a C99 extension [-Wdeclaration-after-statement]
+                        u32 i;
+                            ^
+main.c(102): warning: mixing declarations and code is a C99 extension [-Wdeclaration-after-statement]
+                u8 Pedestrain_Red_TrafficLight;
+                   ^
+main.c(94): warning: no previous prototype for function 'EXTI0_IRQHandler' [-Wmissing-prototypes]
+void EXTI0_IRQHandler(void){ 
+     ^
+main.c(94): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void EXTI0_IRQHandler(void){ 
+^
+static 
+main.c(108): warning: variable 'Pedestrain_Status' may be uninitialized when used here [-Wconditional-uninitialized]
+        if(!Pedestrain_Status){
+            ^~~~~~~~~~~~~~~~~
+main.c(96): note: initialize the variable 'Pedestrain_Status' to silence this warning
+        u8 Pedestrain_Status;
+                            ^
+                             = '\0'
+22 warnings generated.
+compiling main.c...
+linking...
+Program Size: Code=6208 RO-data=268 RW-data=16 ZI-data=1632  
+FromELF: creating hex file...
+".\Objects\Traffic_light.axf" - 0 Error(s), 22 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.5.9.0.pack
+                ARM.CMSIS.5.9.0
+                CMSIS (Common Microcontroller Software Interface Standard)
+   * Component: CORE Version: 5.6.0
+
+Package Vendor: Keil
+                https://www.keil.com/pack/Keil.STM32F1xx_DFP.2.4.1.pack
+                Keil.STM32F1xx_DFP.2.4.1
+                STMicroelectronics STM32F1 Series Device Support, Drivers and Examples
+   * Component: Startup Version: 1.0.0
+
+<h2>Collection of Component include folders:</h2>
+  ./RTE/Device/STM32F103C8
+  ./RTE/_Target_1
+  C:/Users/Abdulrahman Ahmed/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include
+  C:/Users/Abdulrahman Ahmed/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:5.6.0
+
+   * Component: Keil::Device:Startup:1.0.0
+      Source file:   Device/Source/system_stm32f10x.c
+      Source file:   Device/Source/ARM/startup_stm32f10x_md.s
+      Include file:  RTE_Driver/Config/RTE_Device.h
+      Source file:   Device/Source/ARM/STM32F1xx_OPT.s
+Build Time Elapsed:  00:00:00
+</pre>
+</body>
+</html>
