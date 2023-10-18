@@ -1,8 +1,8 @@
-/*********************************************************************************************/
-/******************************* Author    : Abdulrahman Ahmed *******************************/
-/******************************* Version   : 0.1               *******************************/
-/******************************* Module    : NVIC_private.h    *******************************/
-/*********************************************************************************************/
+/****************************************************************/
+/******* Author    : Abdulrahman Ahmed Saeed    *****************/
+/******* Version   : 0.1                        *****************/
+/******* File Name : NVIC_private.              *****************/
+/****************************************************************/
 #ifndef NVIC_PRIVATE_H_
 #define NVIC_PRIVATE_H_
 
@@ -61,7 +61,7 @@
 /**
  * @brief NVIC IPR Base Address
  */                                                 
-#define NVIC_IPR_BASE_ADDRESS    (((volatile u8 *)0xE000E400)) /**< INTERRUPT PRIORITY REGISTERS BASE ADDRESS */
+#define NVIC_IPR_BASE_ADDRESS    (((volatile u32 *)0xE000E400)) /**< INTERRUPT PRIORITY REGISTERS BASE ADDRESS */
 
 /**
  * @brief Priority Grouping Values

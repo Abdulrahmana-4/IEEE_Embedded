@@ -1,21 +1,23 @@
-/*********************************************************************************************/
-/******************************* Author    : Abdulrahman Ahmed *******************************/
-/******************************* Version   : 0.1               *******************************/
-/******************************* Module    : NVIC_program.c    *******************************/
-/*********************************************************************************************/
+/****************************************************************/
+/******* Author    : Abdulrahman Ahmed Saeed    *****************/
+/******* Version   : 0.1                        *****************/
+/******* File Name : NVIC_config.h              *****************/
+/****************************************************************/
 
-/******************************************** LIB ********************************************/
+/*****************************< LIB *****************************/
 #include "STD_TYPES.h"
 #include "BIT_MATH.h"
-
-/******************************************** MCAL *******************************************/
+/*****************************< MCAL *****************************/
+/**< NVIC */
 #include "NVIC_interface.h"
 #include "NVIC_private.h"
 #include "NVIC_config.h"
-
-STD_ReturnType MCAL_NVIC_EnableIRQ(IRQn_Type Copy_IRQn)
+/**< SCB */
+#include "SCB_interface.h"
+/*****************************< Function Implementations *****************************/
+Std_ReturnType MCAL_NVIC_EnableIRQ(IRQn_Type Copy_IRQn)
 {
-   STD_ReturnType Local_FunctionStatus = E_NOT_OK;
+   Std_ReturnType Local_FunctionStatus = E_NOT_OK;
     
    if(Copy_IRQn < 32)
     {
@@ -41,9 +43,9 @@ STD_ReturnType MCAL_NVIC_EnableIRQ(IRQn_Type Copy_IRQn)
     
 }
 
-STD_ReturnType MCAL_NVIC_DisableIRQ(IRQn_Type Copy_IRQn)
+Std_ReturnType MCAL_NVIC_DisableIRQ(IRQn_Type Copy_IRQn)
 {
-    STD_ReturnType Local_FunctionStatus = E_NOT_OK;
+    Std_ReturnType Local_FunctionStatus = E_NOT_OK;
 
    if(Copy_IRQn < 32)
     {
@@ -68,9 +70,9 @@ STD_ReturnType MCAL_NVIC_DisableIRQ(IRQn_Type Copy_IRQn)
     return Local_FunctionStatus;
 }
 
-STD_ReturnType MCAL_NVIC_SetPendingIRQ(IRQn_Type Copy_IRQn)
+Std_ReturnType MCAL_NVIC_SetPendingIRQ(IRQn_Type Copy_IRQn)
 {
-    STD_ReturnType Local_FunctionStatus = E_NOT_OK;
+    Std_ReturnType Local_FunctionStatus = E_NOT_OK;
 
    if(Copy_IRQn < 32)
     {
@@ -95,9 +97,9 @@ STD_ReturnType MCAL_NVIC_SetPendingIRQ(IRQn_Type Copy_IRQn)
     return Local_FunctionStatus;
 }
 
-STD_ReturnType MCAL_NVIC_ClearPendingIRQ(IRQn_Type Copy_IRQn)
+Std_ReturnType MCAL_NVIC_ClearPendingIRQ(IRQn_Type Copy_IRQn)
 {
-    STD_ReturnType Local_FunctionStatus = E_NOT_OK;
+    Std_ReturnType Local_FunctionStatus = E_NOT_OK;
 
     if (Copy_IRQn < 32)
     {
@@ -118,9 +120,9 @@ STD_ReturnType MCAL_NVIC_ClearPendingIRQ(IRQn_Type Copy_IRQn)
     return Local_FunctionStatus;
 }
 
-STD_ReturnType MCAL_NVIC_GetPendingIRQ(IRQn_Type Copy_IRQn, u8 *Copy_ReturnPendingFlag)
+Std_ReturnType MCAL_NVIC_GetPendingIRQ(IRQn_Type Copy_IRQn, u8 *Copy_ReturnPendingFlag)
 {
-    STD_ReturnType Local_FunctionStatus = E_NOT_OK;
+    Std_ReturnType Local_FunctionStatus = E_NOT_OK;
 
     if (Copy_ReturnPendingFlag != NULL)
     {
@@ -173,9 +175,9 @@ STD_ReturnType MCAL_NVIC_GetPendingIRQ(IRQn_Type Copy_IRQn, u8 *Copy_ReturnPendi
     return Local_FunctionStatus;
 }
 
-STD_ReturnType MCAL_NVIC_xSetPriority(IRQn_Type Copy_IRQn, u32 Copy_Priority)
+Std_ReturnType MCAL_NVIC_xSetPriority(IRQn_Type Copy_IRQn, u8 Copy_Priority)
 {
-    STD_ReturnType Local_FunctionStatus = E_NOT_OK;
+    Std_ReturnType Local_FunctionStatus = E_NOT_OK;
 
     if (Copy_IRQn < 0 || Copy_IRQn >= NUMBER_OF_INTERRUPTS) /**< Check if IRQn is within valid range */ 
     {
@@ -184,14 +186,18 @@ STD_ReturnType MCAL_NVIC_xSetPriority(IRQn_Type Copy_IRQn, u32 Copy_Priority)
 
     if (Copy_Priority <= NVIC_MAX_PRIORITY) /**< Ensure the priority value is within the valid range (0-255) */ 
     {
-        /**< Calculate the register index (IPRx) and bit position within the register */ 
-        u8 RegisterIndex = Copy_IRQn / 4;     /**< Divide by 4 to get the register index */  
-
-        /**< Set the priority in the appropriate IPRx register */ 
-        NVIC_IPR_BASE_ADDRESS[RegisterIndex] = (Copy_Priority << 4);
-        
         /**< Set the group and sub-group priority for interrupt handling in SCB_AIRCR register */
         SCB_SetPriorityGrouping(NVIC_0GROUP_16SUB);
+        
+        /**< Calculate the register index (IPRx) and bit position within the register */ 
+        u32 RegisterIndex = Copy_IRQn / 4;     /**< Divide by 4 to get the register index */  
+        u32 BitPosition = (Copy_IRQn % 4) * 8; /**< Multiply by 8 to get the bit position */
+
+        /**< Clear the bits that control the priority for the given interrupt */ 
+        NVIC_IPR_BASE_ADDRESS[RegisterIndex] &= ~(0xFF << BitPosition);
+
+        /**< Set the priority in the appropriate IPRx register */ 
+        NVIC_IPR_BASE_ADDRESS[RegisterIndex] = (Copy_Priority << (BitPosition << 4));
 
         Local_FunctionStatus = E_OK;
     }
@@ -199,9 +205,9 @@ STD_ReturnType MCAL_NVIC_xSetPriority(IRQn_Type Copy_IRQn, u32 Copy_Priority)
     return Local_FunctionStatus;
 }
 
-STD_ReturnType MCAL_NVIC_vSetPriority(IRQn_Type Copy_IRQn, u8 Copy_GroupPriority, u8 Copy_SubPriority)
+Std_ReturnType MCAL_NVIC_vSetPriority(IRQn_Type Copy_IRQn, u8 Copy_GroupPriority, u8 Copy_SubPriority)
 {
-    STD_ReturnType Local_FunctionStatus = E_NOT_OK;
+    Std_ReturnType Local_FunctionStatus = E_NOT_OK;
     u8 NVIC_MAX_Group_Priority;
     u8 NVIC_MAX_Sub_Priority;
 
@@ -218,7 +224,7 @@ STD_ReturnType MCAL_NVIC_vSetPriority(IRQn_Type Copy_IRQn, u8 Copy_GroupPriority
         NVIC_MAX_Group_Priority = 1;
         NVIC_MAX_Sub_Priority = 7;
     #elif (PRIORITY_GROUPING == NVIC_0GROUP_16SUB)
-        NVIC_MAX_Group_Priority = NVIC_INVALID_PRIORITY;
+        NVIC_MAX_Group_Priority = NONE;
         NVIC_MAX_Sub_Priority = 15;
     #else
         #error "Invalid PRIORITY_GROUPING value. Please choose from _16GROUP_SUB0, _8GROUP_SUB2, _4GROUP_SUB4, _2GROUP_SUB8, or _0GROUP_SUB16."
@@ -230,46 +236,60 @@ STD_ReturnType MCAL_NVIC_vSetPriority(IRQn_Type Copy_IRQn, u8 Copy_GroupPriority
         return Local_FunctionStatus;
     }
 
-    u8 Local_Priority = (Copy_SubPriority | (Copy_GroupPriority << (PRIORITY_GROUPING - NVIC_16GROUP_0SUB) / 0x100));
-
-    if (Copy_IRQn < 0 || Copy_IRQn >= NUMBER_OF_INTERRUPTS)
+    if (Copy_IRQn > NUMBER_OF_INTERRUPTS)
     {
         /**< Check if IRQn is within valid range */
         return Local_FunctionStatus;
     }
-
-    /**< Calculate the register index (IPRx) and bit position within the register */
-    u8 RegisterIndex = Copy_IRQn / 4; /* Divide by 4 to get the register index */
-
-    /**< Set the priority in the appropriate IPRx register */
-    NVIC_IPR_BASE_ADDRESS[RegisterIndex] = (Local_Priority << 4);
 
     /**< Configure the priority grouping for the Nested Vectored Interrupt Controller (NVIC) */
     SCB_SetPriorityGrouping(PRIORITY_GROUPING);
 
+    /**< Calculate the Priority value will be added to the IPRx */
+    u8 Local_Priority = (Copy_SubPriority | (Copy_GroupPriority << (PRIORITY_GROUPING - NVIC_16GROUP_0SUB) / 0x100));
+
+    /**< Calculate the register index (IPRx) and bit position within the register */
+    u32 RegisterIndex = Copy_IRQn / 4;     /**< Divide by 4 to get the register index */
+    u32 BitPosition = (Copy_IRQn % 4) * 8; /**< Multiply by 8 to get the bit position */ 
+   
+    /**< Read the current value of the IPR register */ 
+    u32 RegValue = NVIC_IPR_BASE_ADDRESS[RegisterIndex];
+   
+    /**< Clear the bits that control the priority for the given interrupt */ 
+    RegValue &= ~(0xFF << BitPosition);
+
+    /**< Set the priority in the appropriate IPRx register */ 
+    RegValue |= (Local_Priority << BitPosition);
+    
+    /**< Write the modified value back to the IPR register */ 
+    NVIC_IPR_BASE_ADDRESS[RegisterIndex] = (RegValue << 4);
+
     return Local_FunctionStatus;
 }
 
-STD_ReturnType MCAL_NVIC_xGetPriority(IRQn_Type IRQn, u8 *Copy_Priority)
+Std_ReturnType MCAL_NVIC_xGetPriority(IRQn_Type Copy_IRQn, u8 *Copy_Priority)
 {
-    STD_ReturnType Local_FunctionStatus = E_NOT_OK;
+    Std_ReturnType Local_FunctionStatus = E_NOT_OK;
 
-    if (IRQn < 0 || IRQn > NUMBER_OF_INTERRUPTS)
+    if (Copy_IRQn > NUMBER_OF_INTERRUPTS) /**< Check if IRQn is within valid range */
     {
-        /**< Check if IRQn is within valid range */
         return Local_FunctionStatus;
     }
 
     /**< Calculate the register index (IPRx) and bit position within the register */
-    u8 RegisterIndex = IRQn / 4; /* Divide by 4 to get the register index */
-    u8 PriorityRegisterValue = NVIC_IPR_BASE_ADDRESS[RegisterIndex];
+    u8 RegisterIndex = Copy_IRQn / 4;     /**< Divide by 4 to get the register index */
+    u8 BitIndex = (Copy_IRQn % 4);        /**< Remainder of 4 to get the bit index */
+    u8 BitPosition = (Copy_IRQn % 4) * 8; /**< Multiply by 8 to get the bit position */
+
+    /**< Pointer arithmetic to access the IPRx register */
+    u8 *PriorityRegister = (u8 *)&NVIC_IPR_BASE_ADDRESS[RegisterIndex];
 
     /**< Extract the priority from the IPRx register */
-    *Copy_Priority = (PriorityRegisterValue >> 4) & 0xFF;
+    *Copy_Priority = (PriorityRegister[BitIndex] >> (BitPosition)) & 0xFF;
 
     Local_FunctionStatus = E_OK;
 
-    /**< You may want to return the extracted priority here */
+    /**< Return the function status here */
     return Local_FunctionStatus;
 }
 /*****************************< End of Function Implementations *****************************/
